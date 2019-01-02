@@ -1,0 +1,24 @@
+{
+  "name": "cosmic",
+  "version": "1.0.0",
+  "description": "game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omgimanerd/how-to-build-a-multiplayer-browser-game.git"
+  },
+  "author": "1mpr3za",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omgimanerd/how-to-build-a-multiplayer-browser-game/issues"
+  },
+  "homepage": "https://github.com/omgimanerd/how-to-build-a-multiplayer-browser-game#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.2.0"
+  }
+}

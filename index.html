@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Наша многопользовательская игра</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        canvas {
+            width: 100vw;
+            height: 100vh;
+        }
+        #bg{
+            image-rendering: pixelated;
+        }
+    </style>
+    <script src="/socket.io/socket.io.js?x47289"></script>
+</head>
+<body>
+<div style="display:none;">
+    <img src="/static/img/bg.png" id="bg">
+    <img src="/static/img/heroes/starthero/pic.png" id="hero">
+    <img src="/static/img/heroes/starthero/run_down2.png" id="run_down">
+    <img src="/static/img/heroes/starthero/run_left.png" id="run_left">
+    <img src="/static/img/heroes/starthero/run_right.png" id="run_right">
+    <img src="/static/img/heroes/starthero/run_up.png" id="run_up">
+    <img src="/static/img/heroes/starthero/attack_down.png" id="attack_down">
+    <img src="/static/img/ground/grass.png" id="grass1" >
+    <img src="/static/img/ground/grass2.png" id="grass2" >
+    <img src="/static/img/ground/grass0.png" id="grass0" >
+</div>
+<canvas id="canvas"></canvas>
+</body>
+<script src="/static/render.js?x47289"></script>
+<script src="/static/action.js?x47289"></script>
+<script src="/static/game.js?x47289"></script>
+</html>
