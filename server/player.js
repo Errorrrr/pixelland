@@ -10,6 +10,7 @@ class Player{
         this.hp = 100;
         this.stan = 0;
         this.lastPlayerHit = null;
+        this.attackRadius = 100;
         this.vector = 'down';
         this.ismove = false;
         this.sector_x = Math.floor((x) / 100);
@@ -32,7 +33,11 @@ class Player{
     /** @description Метод атаки.
     */
     isAttack() {
-
+        var x,y,sideX,sideY;
+        getAttackSquad();
+        if(player.isHeat(x,y,sideX,sideY) == true){
+            player.heat(this, 282);
+        }   
     }
     /** @description Метод получения урона.
     * @param {number} player Сокет игрока по которому должен пройти урон.
@@ -44,10 +49,40 @@ class Player{
     }
     /** @description Попадает ли player?.
     */
-    isHeat(x,y,side){
-        var is;
-        if(this.x >= x-(side/2) && this.x <= x+(side/2) && this.y >= y-(side/2) && this.y <= y+(side/2)){
-            return is;
+    isHeat(x,y,sideX,sideY){
+        if(this.x >= x-(sideX/2) && this.x <= x+(sideX/2) && this.y >= y-(sideY/2) && this.y <= y+(sideY/2)){
+            return true;
+        }
+        eles{
+            return false;
+        }
+    }
+    /** @description Просчет координат и стороны прямоугольника атаки.
+    */
+    getAttackSquad(){
+        if(vector == 'up'){
+            x = this.x;
+            y = this.y + attackRadius;
+            sideX = 100;
+            sideY = 60;
+        }
+        else if(vector == 'down'){
+            x = this.x;
+            y = this.y - attackRadius;
+            sideX = 100;
+            sideY = 60;
+        }
+        else if(vector == 'left'){
+            x = this.x + attackRadius;
+            y = this.y;
+            sideX = 60;
+            sideY = 100;
+        }
+        else if(vector == 'right'){
+            x = this.x - attackRadius;
+            y = this.y;
+            sideX = 60;
+            sideY = 100;
         }
     }
 }
