@@ -35,7 +35,7 @@ io.on('connection', function(socket) {
         var player = players[socket.id] || {};
         player.sector_x = Math.floor((player.x) / 100);
         player.sector_y = Math.floor((player.y+30) / 60);
-        player.speed = map.location.sectors[player.sector_x][player.sector_y].ground.speed;
+        //player.speed = map.location.sectors[player.sector_x][player.sector_y].ground.speed;
         //ПОТОМ РЕАЛИЗОВАТЬ ЭТО ЧЕРЕЗОТЕДЛЬНЫЕ КЛАССЫ ПРОВЕРКИ
         if(player.attack_stage == player.endOfAttack){
             player.attack_stage = -1;
