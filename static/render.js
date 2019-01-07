@@ -74,7 +74,11 @@ class Renderer{
 
     players(player){
         context.beginPath();
-        context.arc(player.x-this.real_x+this.x, player.y-this.real_y+this.y, 50, 0, 2 * Math.PI);
+        var plus = 0;
+        if(player.hp < 1){
+            plus = 100;
+        }
+        context.arc(player.x-this.real_x+this.x, player.y-this.real_y+this.y, 50+plus, 0, 2 * Math.PI);
         context.fill();
     }
 
