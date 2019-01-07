@@ -16,6 +16,10 @@ class Player{
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.xSquad;
+        this.ySquad;
+        this.sideX;
+        this.sideY;
         this.hp = 100;
         this.stan = 0;
         this.lastPlayerHit = null;
@@ -94,6 +98,10 @@ class Player{
             sideX = 60;
             sideY = 100;
         }
+        this.xSquad = x;
+        this.ySquad = y;
+        this.sideX = sideX;
+        this.sideY = sideY;
         return new AttackSquad(x,y,sideX,sideY);
     }
 }

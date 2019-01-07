@@ -69,8 +69,7 @@ class Renderer{
         anim.handler();
         
         if(player.attack == true){
-            var squad = player.getAttackSquad();
-            context.rect(squad.x-this.real_x+this.x, squad.y-this.real_y+this.y, squad.sideX, squad.sideY);
+            context.rect(player.xSquad-this.real_x+this.xSquad, player.ySquad-this.real_y+this.ySquad, player.sideX, player.sideY);
             context.fill();
         }
     }
