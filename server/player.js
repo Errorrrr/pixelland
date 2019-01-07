@@ -1,3 +1,12 @@
+class AttackSquad{
+    constructor(){
+        this.x;
+        this.y;
+        this.sideX;
+        this.sideY;
+    }
+}
+
 class Player{
     /** @description Характеристики персонажа.
     * @param {int} hp указывает на количество здоровья у персонажа.
@@ -33,9 +42,8 @@ class Player{
     /** @description Метод атаки.
     */
     isAttack() {
-        var x,y,sideX,sideY;
-        getAttackSquad();
-        if(player.isHeat(x,y,sideX,sideY) == true){
+        var arr = this.getAttackSquad();
+        if(player.isHeat(arr) == true){
             player.heat(this, 282);
         }   
     }
@@ -53,9 +61,7 @@ class Player{
         if(this.x >= x-(sideX/2) && this.x <= x+(sideX/2) && this.y >= y-(sideY/2) && this.y <= y+(sideY/2)){
             return true;
         }
-        eles{
-            return false;
-        }
+        return false; 
     }
     /** @description Просчет координат и стороны прямоугольника атаки.
     */
@@ -84,6 +90,7 @@ class Player{
             sideX = 60;
             sideY = 100;
         }
+        return new AttackSquad(x,y,sideX,sideY);
     }
 }
 
