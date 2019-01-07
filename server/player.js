@@ -1,11 +1,16 @@
 class Player{
     /**
     Характеристики персонажа
+    Переменная hp - очки здоровья персонажа
+    Переменная stan - время оглушения
+    Переменная lastPlayerHit - последний игрок, нанесший урон
     */
     constructor(x, y){
         this.x = x;
         this.y = y;
-        this.HP = 100;
+        this.hp = 100;
+        this.stan = 0;
+        this.lastPlayerHit = "";
         this.vector = 'down';
         this.ismove = false;
         this.sector_x = Math.floor((x) / 100);
@@ -36,8 +41,15 @@ class Player{
     /**
     Метод получения урона
     */
-    heat() {
-        this.HP -= 10;
+    heat(player, pureDamage) {
+        player.hp -= pureDamage;
+        player.stan = 2;
+    }
+    /**
+    Последний, кто нанёс урон
+    */
+    lastHitPlayer(player){
+        This.lastPlayerHit = player;
     }
 }
 
