@@ -41,14 +41,15 @@ class Player{
     }
     /** @description Метод атаки.
     */
-    isAttack() {
-        var arr = this.getAttackSquad();
-        if(player.isHeat(arr) == true){
-            player.heat(this, 282);
-        }   
+    attack(players) {
+        var squadKit = this.getAttackSquad();
+        players.forEach(function(element)){
+        if(element.isHeat(squadKit) == true){
+            element.heat(this, 282);
+        }} 
     }
     /** @description Метод получения урона.
-    * @param {number} player Сокет игрока по которому должен пройти урон.
+    * @param {number} player Сокет игрока, который нанес урон.
     */
     heat(player, pureDamage) {
         this.hp -= pureDamage;
