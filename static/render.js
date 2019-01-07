@@ -67,12 +67,10 @@ class Renderer{
         this.checkSlide(game_tick);
         var anim = new AnimationPlayer(player,this.x,this.y,this.slide);//Подумать над логикой слайдов
         anim.handler();
-
-        context.arc(this.x, this.y, 3, 0, 2 * Math.PI);
-        context.fill();
         
         if(player.attack == true){
-            context.arc(player.x, player.y, 500, 100* Math.PI); 
+            var squad = player.getAttackSquad();
+            context.rect(squad.x-this.real_x+this.x, squad.y-this.real_y+this.y, squad.sideX, squad.sideY);
             context.fill();
         }
     }
