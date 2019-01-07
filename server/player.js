@@ -1,5 +1,5 @@
 class AttackSquad{
-    constructor(){
+    constructor(x, y, sideX, sideY){
         this.x;
         this.y;
         this.sideX;
