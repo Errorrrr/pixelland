@@ -1,8 +1,8 @@
 class Player{
-    /** @description Характеристики персонажа
-    * @param {int} hp указывает на количество здоровья у персонажа
-    * @param {int} stan указывает на время оглушения
-    * @param {string} lastPlayerHit указывает на последнего игрока, нанесшего урон персонажу
+    /** @description Характеристики персонажа.
+    * @param {int} hp указывает на количество здоровья у персонажа.
+    * @param {int} stan указывает на время оглушения.
+    * @param {string} lastPlayerHit указывает на последнего игрока, нанесшего урон персонажу.
     */
     constructor(x, y){
         this.x = x;
@@ -19,28 +19,36 @@ class Player{
         this.attack_stage = -1;
         this.endOfAttack = 3;
     }
-    /** @description Движение по оси y
+    /** @description Движение по оси y.
     */
     vertical_move(y){
         this.y += y * this.speed;
     }
-    /** @description Движение по оси x
+    /** @description Движение по оси x.
     */
     horizontal_move(x){
         this.x += x * this.speed;
     }
-    /** @description Метод атаки
+    /** @description Метод атаки.
     */
     isAttack() {
 
     }
-    /** @description Метод получения урона
+    /** @description Метод получения урона.
     * @param {number} player Сокет игрока по которому должен пройти урон.
     */
-    Heat(player, pureDamage) {
-        player.hp -= pureDamage;
+    heat(player, pureDamage) {
+        this.hp -= pureDamage;
         player.stan = 2;
         this.lastPlayerHit = player;
+    }
+    /** @description Попадает ли player?.
+    */
+    isHeat(x,y,side){
+        var is;
+        if(this.x >= x-(side/2) && this.x <= x+(side/2) && this.y >= y-(side/2) && this.y <= y+(side/2)){
+            return is;
+        }
     }
 }
 
