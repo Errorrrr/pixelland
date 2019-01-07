@@ -43,10 +43,11 @@ class Player{
     */
     attack(players) {
         var squadKit = this.getAttackSquad();
-        players.forEach(function(element)){
-        if(element.isHeat(squadKit) == true){
-            element.heat(this, 282);
-        }} 
+        players.forEach(function(element){ 
+            if(element.isHeat(squadKit) == true){ 
+                element.heat(this, 282); 
+            }
+        });
     }
     /** @description Метод получения урона.
     * @param {number} player Сокет игрока, который нанес урон.
