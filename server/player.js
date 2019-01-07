@@ -16,10 +16,7 @@ class Player{
     constructor(x, y){
         this.x = x;
         this.y = y;
-        this.xSquad;
-        this.ySquad;
-        this.sideX;
-        this.sideY;
+        this.SquadKit;
         this.hp = 100;
         this.stan = 0;
         this.lastPlayerHit = null;
@@ -67,7 +64,9 @@ class Player{
     isHeat(x,y,sideX,sideY){
         if(this.x >= x-(sideX/2) && this.x <= x+(sideX/2) && this.y >= y-(sideY/2) && this.y <= y+(sideY/2)){
             return true;
+            console.log('hit!');
         }
+        console.log('!hit');
         return false; 
     }
     /** @description Просчет координат и стороны прямоугольника атаки.
@@ -76,32 +75,29 @@ class Player{
         var x,y,sideX,sideY;
         if(this.vector == 'up'){
             x = this.x;
-            y = this.y + this.attackRadius;
+            y = this.y - this.attackRadius;
             sideX = 100;
             sideY = 60;
         }
         else if(this.vector == 'down'){
             x = this.x;
-            y = this.y - this.attackRadius;
+            y = this.y + this.attackRadius;
             sideX = 100;
             sideY = 60;
         }
         else if(this.vector == 'left'){
-            x = this.x + this.attackRadius;
-            y = this.y;
-            sideX = 60;
-            sideY = 100;
-        }
-        else if(this.vector == 'right'){
             x = this.x - this.attackRadius;
             y = this.y;
             sideX = 60;
             sideY = 100;
         }
-        this.xSquad = x;
-        this.ySquad = y;
-        this.sideX = sideX;
-        this.sideY = sideY;
+        else if(this.vector == 'right'){
+            x = this.x + this.attackRadius;
+            y = this.y;
+            sideX = 60;
+            sideY = 100;
+        }
+        this.SquadKit = [x, y, sideX, sideY];
         return new AttackSquad(x,y,sideX,sideY);
     }
 }
