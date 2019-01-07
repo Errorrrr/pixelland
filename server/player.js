@@ -22,7 +22,7 @@ class Player{
     /** @description Движение по оси y
     */
     vertical_move(y){
-      this.y += y * this.speed;
+        this.y += y * this.speed;
     }
     /** @description Движение по оси x
     */
@@ -35,8 +35,9 @@ class Player{
 
     }
     /** @description Метод получения урона
+    * @param {number} player Сокет игрока по которому должен пройти урон.
     */
-    isHeat(player, pureDamage) {
+    Heat(player, pureDamage) {
         player.hp -= pureDamage;
         player.stan = 2;
         this.lastPlayerHit = player;
