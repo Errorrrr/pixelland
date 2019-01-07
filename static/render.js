@@ -70,6 +70,11 @@ class Renderer{
 
         context.arc(this.x, this.y, 3, 0, 2 * Math.PI);
         context.fill();
+        
+        if(player.attack == true){
+            context.arc(player.x, player.y, 500, 100* Math.PI); 
+            context.fill();
+        }
     }
 
     players(player){

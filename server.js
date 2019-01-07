@@ -39,7 +39,7 @@ io.on('connection', function(socket) {
         //ПОТОМ РЕАЛИЗОВАТЬ ЭТО ЧЕРЕЗОТЕДЛЬНЫЕ КЛАССЫ ПРОВЕРКИ
         if(player.attack_stage == player.endOfAttack){
             player.attack_stage = -1;
-            player.attack(players);
+            player.doAttack(players);
             player.attack = false;
         }
         if(data.attack || player.attack_stage != -1){

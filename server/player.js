@@ -41,13 +41,14 @@ class Player{
     }
     /** @description Метод атаки.
     */
-    attack(players) {
+    doAttack(players) {
         var squadKit = this.getAttackSquad();
-        players.forEach(function(element){ 
-            if(element.isHeat(squadKit) == true){ 
-                element.heat(this, 282); 
+        for (var id in players) { 
+            var player = players[id];
+            if(player.isHeat(squadKit) == true){ 
+                player.heat(this, 282); 
             }
-        });
+        }
     }
     /** @description Метод получения урона.
     * @param {number} player Сокет игрока, который нанес урон.
@@ -68,26 +69,27 @@ class Player{
     /** @description Просчет координат и стороны прямоугольника атаки.
     */
     getAttackSquad(){
-        if(vector == 'up'){
+        var x,y,sideX,sideY;
+        if(this.vector == 'up'){
             x = this.x;
-            y = this.y + attackRadius;
+            y = this.y + this.attackRadius;
             sideX = 100;
             sideY = 60;
         }
-        else if(vector == 'down'){
+        else if(this.vector == 'down'){
             x = this.x;
-            y = this.y - attackRadius;
+            y = this.y - this.attackRadius;
             sideX = 100;
             sideY = 60;
         }
-        else if(vector == 'left'){
-            x = this.x + attackRadius;
+        else if(this.vector == 'left'){
+            x = this.x + this.attackRadius;
             y = this.y;
             sideX = 60;
             sideY = 100;
         }
-        else if(vector == 'right'){
-            x = this.x - attackRadius;
+        else if(this.vector == 'right'){
+            x = this.x - this.attackRadius;
             y = this.y;
             sideX = 60;
             sideY = 100;
