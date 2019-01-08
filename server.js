@@ -27,7 +27,7 @@ var players = {};
 var tick = 0;
 io.on('connection', function(socket) {
     socket.on('new player', function() {
-        players[socket.id] = new Player(0, 0);
+        players[socket.id] = new Player(socket.id, 0, 0);
         io.sockets.emit('state', map);
         io.sockets.sockets[socket.id].emit('load_map', map);
     });

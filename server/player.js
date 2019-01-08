@@ -4,7 +4,8 @@ class Player{
     * @param {int} stan указывает на время оглушения.
     * @param {string} lastPlayerHit указывает на последнего игрока, нанесшего урон персонажу.
     */
-    constructor(x, y){
+    constructor(Socket, x, y){
+        this.id = Socket;
         this.x = x;
         this.y = y;
         this.SquadKit;
@@ -37,7 +38,8 @@ class Player{
         var squadKit = this.getAttackSquad();
         for (var id in players) { 
             var player = players[id];
-            if(player.isHeat(squadKit, player) == true){ 
+            if(player.isHeat(squadKit) == true && id != this.id){ 
+                console.log("Минус лицо");
                 player.heat(this, 282); 
             }
         }
@@ -52,10 +54,10 @@ class Player{
     }
     /** @description Попадает ли player?.
     */
-    isHeat(SquadKit, PlayerNow){
-        console.log(SquadKit);
-        console.log(PlayerNow.x,PlayerNow.y);
-        if(PlayerNow.x >= SquadKit.x-(SquadKit.sideX/2) && PlayerNow.x <= SquadKit.x+(SquadKit.sideX/2) && PlayerNow.y >= SquadKit.y-(SquadKit.sideY/2) && PlayerNow.y <= SquadKit.y+(SquadKit.sideY/2)){
+    isHeat(squadKit){
+        console.log(squadKit);
+        console.log(this.x,this.y);
+        if(this.x >= squadKit.x-(squadKit.sideX/2) && this.x <= squadKit.x+(squadKit.sideX/2) && this.y >= squadKit.y-(squadKit.sideY/2) && this.y <= squadKit.y+(squadKit.sideY/2)){
             return true;
             console.log('hit!');
         }
