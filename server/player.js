@@ -1,12 +1,3 @@
-class AttackSquad{
-    constructor(x, y, sideX, sideY){
-        this.x;
-        this.y;
-        this.sideX;
-        this.sideY;
-    }
-}
-
 class Player{
     /** @description Характеристики персонажа.
     * @param {int} hp указывает на количество здоровья у персонажа.
@@ -46,7 +37,7 @@ class Player{
         var squadKit = this.getAttackSquad();
         for (var id in players) { 
             var player = players[id];
-            if(player.isHeat(squadKit) == true){ 
+            if(player.isHeat(squadKit, player) == true){ 
                 player.heat(this, 282); 
             }
         }
@@ -61,8 +52,10 @@ class Player{
     }
     /** @description Попадает ли player?.
     */
-    isHeat(x,y,sideX,sideY){
-        if(this.x >= x-(sideX/2) && this.x <= x+(sideX/2) && this.y >= y-(sideY/2) && this.y <= y+(sideY/2)){
+    isHeat(SquadKit, PlayerNow){
+        console.log(SquadKit);
+        console.log(PlayerNow.x,PlayerNow.y);
+        if(PlayerNow.x >= SquadKit.x-(SquadKit.sideX/2) && PlayerNow.x <= SquadKit.x+(SquadKit.sideX/2) && PlayerNow.y >= SquadKit.y-(SquadKit.sideY/2) && PlayerNow.y <= SquadKit.y+(SquadKit.sideY/2)){
             return true;
             console.log('hit!');
         }
@@ -98,7 +91,7 @@ class Player{
             sideY = 100;
         }
         this.SquadKit = [x, y, sideX, sideY];
-        return new AttackSquad(x,y,sideX,sideY);
+        return this.SquadKit;
     }
 }
 

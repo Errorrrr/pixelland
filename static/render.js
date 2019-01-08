@@ -70,7 +70,7 @@ class Renderer{
         
         if(player.attack == true){
             var SquadArr = player.SquadKit;
-            context.rect(player.SquadKit[0]-this.real_x+this.x, player.SquadKit[1]-this.real_y+this.y, player.SquadKit[2], player.SquadKit[3]);
+            context.arc(player.SquadKit[0]-this.real_x+this.x, player.SquadKit[1]-this.real_y+this.y, 10, 0, 2 * Math.PI);
             context.fill();
         }
     }
