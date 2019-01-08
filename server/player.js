@@ -8,7 +8,7 @@ class Player{
         this.id = Socket;
         this.x = x;
         this.y = y;
-        this.SquadKit = [];
+        this.squadKit = [];
         this.hp = 100;
         this.stan = 0;
         this.lastPlayerHit = null;
@@ -36,7 +36,7 @@ class Player{
     */
     doAttack(players) {
         var squadKit = this.getAttackSquad();
-        console.log(players)
+        console.log(players);
         for (var id in players) { 
             var player = players[id];
             if(id != this.id && player.isHeat(squadKit) == true){ 
@@ -56,13 +56,9 @@ class Player{
     /** @description Попадает ли player?.
     */
     isHeat(squadKit){
-        this.squadKit['x'] = x;
-        this.squadKit['y'] = y;
-        this.squadKit['sideX'] = sideX;
-        this.squadKit['sideY'] = sideY;
         console.log(squadKit);
         console.log(this.x,this.y);
-        console.log(squadKit[x]);
+        console.log(squadKit['x']);
         if(this.x >= squadKit['x']-(squadKit['sideX']/2) && this.x <= squadKit['x']+(squadKit['sideX']/2) && this.y >= squadKit['y']-(squadKit['sideY']/2) && this.y <= squadKit['y']+(squadKit['sideY']/2)){
             return true;
             console.log('hit!');
@@ -98,8 +94,11 @@ class Player{
             sideX = 60;
             sideY = 100;
         }
-        this.SquadKit = [x, y, sideX, sideY];
-        return this.SquadKit;
+        this.squadKit['x'] = x;
+        this.squadKit['y'] = y;
+        this.squadKit['sideX'] = sideX;
+        this.squadKit['sideY'] = sideY;
+        return this.squadKit;
     }
 }
 
