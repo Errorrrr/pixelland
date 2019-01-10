@@ -11,6 +11,7 @@ class Player{
         this.squadKit = [];
         this.hp = 100;
         this.stan = 0;
+        this.score = 0;
         this.lastPlayerHit = null;
         this.attackRadius = 100;
         this.vector = 'down';
@@ -41,7 +42,11 @@ class Player{
             var player = players[id];
             if(id != this.id && player.isHeat(squadKit) == true){ 
                 console.log("Минус лицо");
-                player.heat(this, 282); 
+                player.heat(this, 282);
+                if(player.hp < 1){
+                    io.sockets.connected[player.id].disconnect();
+                    this.score += 1;
+                }
             }
         }
     }
@@ -56,9 +61,6 @@ class Player{
     /** @description Попадает ли player?.
     */
     isHeat(squadKit){
-        console.log(squadKit);
-        console.log(this.x,this.y);
-        console.log(squadKit['x']);
         if(this.x >= squadKit['x']-(squadKit['sideX']/2) && this.x <= squadKit['x']+(squadKit['sideX']/2) && this.y >= squadKit['y']-(squadKit['sideY']/2) && this.y <= squadKit['y']+(squadKit['sideY']/2)){
             return true;
             console.log('hit!');
