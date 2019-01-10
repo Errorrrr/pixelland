@@ -41,9 +41,11 @@ class Player{
             var player = players[id];
             if(id != this.id && player.isHeat(squadKit) == true){ 
                 console.log("Минус лицо");
-                player.heat(this, 282);
+                player.heat(this, 50);
                 player.death(player);
-                this.addScore(1);
+                if(player.hp < 1){
+                    this.addScore(1);
+                }
                 console.log(this.score);
             }
         }
