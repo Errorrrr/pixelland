@@ -42,9 +42,8 @@ class Player{
             if(id != this.id && player.isHeat(squadKit) == true){ 
                 console.log("Минус лицо");
                 player.heat(this, 50);
-                player.death(player);
                 if(player.hp < 1){
-                    this.addScore(1);
+                    player.death(player,players[this.id],1);
                 }
                 console.log(this.score);
             }
@@ -70,16 +69,15 @@ class Player{
     }
     /** @description Cмерть персонажа.
     */
-    death(player){
-        if(player.hp < 1){
-            console.log('Земля пуховиком!');
-            //io.sockets.connected[player.id].disconnect(true);
-        }
+    death(playerDeath,playerKiller,countScore){
+        console.log('Земля пуховиком!');
+        playerKiller.addScore(countScore,playerKiller);
+        //io.sockets.connected[player.id].disconnect(true);
     }
     /** @description Добавление очков.
     */
-    addScore(countScore){
-        this.score += countScore;
+    addScore(countScore,playerKiller){
+        playerKiller.score += countScore;
     }
     /** @description Просчет координат и стороны прямоугольника атаки.
     */
