@@ -37,16 +37,14 @@ class Player{
     */
     doAttack(players) {
         var squadKit = this.getAttackSquad();
-        console.log(players);
         for (var id in players) { 
             var player = players[id];
             if(id != this.id && player.isHeat(squadKit) == true){ 
                 console.log("Минус лицо");
                 player.heat(this, 282);
-                if(player.hp < 1){
-                    io.sockets.connected[player.id].disconnect();
-                    this.score += 1;
-                }
+                player.death(player);
+                this.addScore(1);
+                console.log(this.score);
             }
         }
     }
@@ -67,6 +65,19 @@ class Player{
         }
         console.log('!hit');
         return false; 
+    }
+    /** @description Cмерть персонажа.
+    */
+    death(player){
+        if(player.hp < 1){
+            console.log('Земля пуховиком!');
+            //io.sockets.connected[player.id].disconnect(true);
+        }
+    }
+    /** @description Добавление очков.
+    */
+    addScore(countScore){
+        this.score += countScore;
     }
     /** @description Просчет координат и стороны прямоугольника атаки.
     */
