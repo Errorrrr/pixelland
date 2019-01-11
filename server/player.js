@@ -43,7 +43,7 @@ class Player{
                 console.log("Минус лицо");
                 player.heat(this, 50);
                 if(player.hp < 1){
-                    player.death(player,players[this.id],1);
+                    player.death(players[this.id],1);
                 }
                 console.log(this.score);
             }
@@ -69,15 +69,15 @@ class Player{
     }
     /** @description Cмерть персонажа.
     */
-    death(playerDeath,playerKiller,countScore){
+    death(playerKiller,countScore){
         console.log('Земля пуховиком!');
-        playerKiller.addScore(countScore,playerKiller);
+        playerKiller.addScore(countScore);
         //io.sockets.connected[player.id].disconnect(true);
     }
     /** @description Добавление очков.
     */
     addScore(countScore,playerKiller){
-        playerKiller.score += countScore;
+        this.score += countScore;
     }
     /** @description Просчет координат и стороны прямоугольника атаки.
     */
