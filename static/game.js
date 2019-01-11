@@ -15,7 +15,7 @@ client_w=document.body.clientWidth;
 client_h=document.body.clientHeight;
 
 let render = new Renderer(client_w/2, client_h/2);
-
+let renderHUD = new hudRender();
 
 socket.emit('new player');
 setInterval(function() {
@@ -37,14 +37,16 @@ socket.on('state', function(players, tick) {
     if(window.map != undefined){// ВПИЛИТЬ ЭТОТ КОСТЫЛЬ В ЗАГРУЗКУ
         render.background( players[socket.id], map);
     }
-
+    var currentUser;
     for (var id in players) {
         var player = players[id];
         if(id == socket.id){
-            render.player(player, tick);
-
+            render.player(currentUser, tick);
+            renderHUD.renderHP(currentUser);
+        console.log(currentUser);
         }else{
             render.players(player);
         }
     }
+        console.log(currentUser);
 });

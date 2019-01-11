@@ -82,8 +82,6 @@ class Renderer{
             plus = 100;
         }
         context.arc(player.x-this.real_x+this.x, player.y-this.real_y+this.y, 50+plus, 0, 2 * Math.PI);
-        context.font = "48px serif";;
-        context.fillText("HP: ", 10, 25);
         context.fill();
     }
 
@@ -111,12 +109,12 @@ class Renderer{
 }
 
 class hudRender{
-    renerUI(){
-        context.msImageSmoothingEnabled = false;
-        context.imageSmoothingEnabled = false;
+    constructor(){
+    }
+    renderHP(player){
         context.beginPath();
         context.font = "48px serif";;
-        context.fillText("HP: ", 10, 25);
+        context.fillText("Health Point: " + player.hp, 10, 25);
         context.fill();
     }
 }
