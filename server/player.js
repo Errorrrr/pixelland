@@ -39,13 +39,11 @@ class Player{
         var squadKit = this.getAttackSquad();
         for (var id in players) { 
             var player = players[id];
-            if(id != this.id && player.isHeat(squadKit) == true){ 
-                console.log("Минус лицо");
+            if(id != this.id && player.isHeat(squadKit) == true){
                 player.heat(this, 50);
                 if(player.hp < 1){
                     player.death(players[this.id],1);
                 }
-                console.log(this.score);
             }
         }
     }
@@ -62,15 +60,12 @@ class Player{
     isHeat(squadKit){
         if(this.x >= squadKit['x']-(squadKit['sideX']/2) && this.x <= squadKit['x']+(squadKit['sideX']/2) && this.y >= squadKit['y']-(squadKit['sideY']/2) && this.y <= squadKit['y']+(squadKit['sideY']/2)){
             return true;
-            console.log('hit!');
         }
-        console.log('!hit');
         return false; 
     }
     /** @description Cмерть персонажа.
     */
     death(playerKiller,countScore){
-        console.log('Земля пуховиком!');
         playerKiller.addScore(countScore);
         //io.sockets.connected[player.id].disconnect(true);
     }

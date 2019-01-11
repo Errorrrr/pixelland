@@ -37,16 +37,18 @@ socket.on('state', function(players, tick) {
     if(window.map != undefined){// ВПИЛИТЬ ЭТОТ КОСТЫЛЬ В ЗАГРУЗКУ
         render.background( players[socket.id], map);
     }
-    var currentUser;
     for (var id in players) {
         var player = players[id];
         if(id == socket.id){
-            render.player(currentUser, tick);
-            renderHUD.renderHP(currentUser);
-        console.log(currentUser);
+            render.player(player, tick);
         }else{
             render.players(player);
         }
     }
-        console.log(currentUser);
+    for (var id in players) {
+        var player = players[id];
+        if(id == socket.id){
+            renderHUD.renderHP(player);
+        }
+    }
 });
