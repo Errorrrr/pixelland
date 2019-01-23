@@ -34,7 +34,6 @@ io.on('connection', function(socket) {
         io.sockets.sockets[socket.id].emit('load_map', map);
     });
     socket.on('movement', function(data) {
-        console.log(enums.ATTACK_STAGE);
         var player = players[socket.id] || {};
         move = new movement(player, data, tick);
         move.parsingCases();

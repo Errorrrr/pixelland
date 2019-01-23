@@ -33,38 +33,23 @@ class ActionHandler{
             this.player.attack_stage = -1;
             this.player.attack = false;
             if (this.data.left) {
-                this.actionKeyLeft();
+                this.action = 'runLeft';
             }
             if (this.data.right) {
-                this.actionKeyRight();
+                this.action = 'runRight';
             }
             if (this.data.up) {
-                this.actionKeyUp();
+                this.action = 'runUp';
             }
             if (this.data.down) {
-                this.actionKeyDown();
+                this.action = 'runDown';
             }
         }
 
         if(!this.data.down &&  !this.data.right && !this.data.up && !this.data.left ){
-            this.actionIddle();
+            this.action = 'iddle'
         }
-    }
-    /** @description Движение вверх.
-    */
-    actionKeyUp(){
-        this.player.vertical_move(-5);
-        this.player.vector = 'up';
-        this.player.ismove = true;
-        this.action = 'run'
-    }
-    /** @description Движение вниз.
-    */
-    actionKeyDown(){
-        this.player.vertical_move(5);
-        this.player.vector = 'down';
-        this.player.ismove = true;
-        this.action = 'run'
+        this.initDo();
     }
     /** @description Движение влево.
     */
@@ -72,7 +57,7 @@ class ActionHandler{
         this.player.horizontal_move(-5);
         this.player.vector = 'left';
         this.player.ismove = true;
-        this.action = 'run'
+        console.log(this.action);
     }
     /** @description Движение вправо.
     */
@@ -80,16 +65,42 @@ class ActionHandler{
         this.player.horizontal_move(5);
         this.player.vector = 'right';
         this.player.ismove = true;
-        this.action = 'run'
+        console.log(this.action);
+    }
+    /** @description Движение вверх.
+    */
+    actionKeyUp(){
+        this.player.vertical_move(-5);
+        this.player.vector = 'up';
+        this.player.ismove = true;
+        console.log(this.action);
+    }
+    /** @description Движение вниз.
+    */
+    actionKeyDown(){
+        this.player.vertical_move(5);
+        this.player.vector = 'down';
+        this.player.ismove = true;
+        console.log(this.action);
     }
     /** @description Стояние на месте.
     */
     actionIddle(){
         this.player.ismove = false;
-        this.action = 'iddle'
+        console.log(this.action);
     }
     initDo(){
-        
+        if(this.action = 'runLeft'){
+            this.actionKeyLeft();
+        }else if(this.action = 'runRight'){
+            this.actionKeyRight();
+        }else if(this.action = 'runUp'){
+            this.actionKeyUp();
+        }else if(this.action = 'runDown'){
+            this.actionKeyDown();
+        }else if(this.action = 'iddle'){
+            this.actionIddle();
+        }
     }
 }
 
