@@ -40,7 +40,7 @@ class AnimationPlayer{
     }
     moveLeft(){
         var img = document.getElementById("run_left");
-        context.drawImage(img, 200*(this.slide % 7), 0, 200, 240, this.camera_x-40, this.camera_y-49, 81, 98);
+        context.drawImage(img, 203*(this.slide % 6), 0, 200, 240, this.camera_x-40, this.camera_y-49, 100, 120);
     }
     attackDown(){
         var img = document.getElementById("attack_down");
