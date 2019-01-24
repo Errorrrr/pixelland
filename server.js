@@ -21,24 +21,24 @@ server.listen(5000, function() {
     console.log('Starting server on port 5000');
 });
 
+const enums = require('./server/enums.js');
 const map = require('./server/start_loc.js');
 const player = require('./server/player.js');
 const ActoinHandler = require('./server/ActoinHandler.js');
-const enums = require('./server/enums.js');
 
 var players = {};
 var tick = 0;
 io.on('connection', function(socket) {
     socket.on('new player', function() {
         var actionHandler = new ActoinHandler();
-        players[socket.id] = new player(socket.id, 0, 0, actionHandler);
+        players[socket.id] = new player(socket.id,0,0,  actionHandler);
         io.sockets.emit('state', map);
         io.sockets.sockets[socket.id].emit('load_map', map);
     });
     socket.on('movement', function(data) {
         var player = players[socket.id] || {};
         player.actionHandler.setPressedCases(data);
-        player.init(data, tick);
+        player.init( tick);
     });
 });
 

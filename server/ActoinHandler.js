@@ -3,12 +3,10 @@ class ActionHandler{
      */
     constructor(){
         this.pressedCases;
-        this.action;
-        this.actionStage;
-        this.isMove;
-        this.horizontalMove;
-        this.verticalMove;
-        this.vector;
+        this.action = 'idle';
+        this.actionStage = 0;
+        this.isMove = 'false';
+        this.vector = 'up';
     }
     /** @description Задаем pressedCases.
      */
@@ -18,31 +16,62 @@ class ActionHandler{
     /** @description Обрабатываем действия.
      */
     initDo(tick){
+        var actionData = [];
+        var predAction = this.action;
+        var predVector = this.vector;
+
+
+        actionData['deltax'] = 0;
+        actionData['deltay'] = 0;
         if(this.pressedCases.left){
-            this.horizontalMove = -5;
+            actionData['deltax'] = -5;
+            actionData['action'] = 'move';
+            this.action = 'move';
             this.isMove = true;
             this.vector = 'left';
-        }else if(this.pressedCases.right){
-            this.horizontalMove = 5;
+        }
+        if(this.pressedCases.right){
+            actionData['deltax'] = 5;
+            actionData['action'] = 'move';
+            this.action = 'move';
             this.isMove = true;
             this.vector = 'right';
-        }else if(this.pressedCases.up){
-            this.verticalMove = -5;
+        }
+        if(this.pressedCases.up){
+            actionData['deltay'] = -5;
+            actionData['action'] = 'move';
+            this.action = 'move';
             this.isMove = true;
             this.vector = 'up';
-        }else if(this.pressedCases.down){
-            this.verticalMove = 5;
+        }
+        if(this.pressedCases.down){
+            actionData['deltay'] = 5;
+            actionData['action'] = 'move';
+            this.action = 'move';
             this.isMove = true;
             this.vector = 'down';
-        }else if(!this.pressedCases.down &&  !this.pressedCases.right && !this.pressedCases.up && !this.pressedCases.left){
+        }
+        if(!this.pressedCases.down &&  !this.pressedCases.right && !this.pressedCases.up && !this.pressedCases.left){
+            actionData['action'] = 'idle';
+            this.action = 'idle';
             this.isMove = false;
         }
-        var returnValue = [];
-        returnValue['horizontalMove'] = this.horizontalMove;
-        returnValue['verticalMove'] = this.verticalMove;
-        returnValue['isMove'] = this.isMove;
-        returnValue['vector'] = this.vector;
-        return returnValue;
+
+
+        if(actionData['action'] == predAction && (predAction == 'move' ? predVector == this.vector : true) && this.actionStage < this.getEndOfAction(actionData['action'])){
+            this.actionStage += 1;
+        }else{
+            this.actionStage = 0;
+        }
+        return actionData;
+    }
+
+    getEndOfAction(action){
+
+        if(action == 'move'){
+            return 180;
+        }
+        return 0;
     }
 }
 

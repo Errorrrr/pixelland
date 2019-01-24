@@ -4,41 +4,34 @@ class Player{
      * @param {int} stan указывает на время оглушения.
      * @param {string} lastPlayerHit указывает на последнего игрока, нанесшего урон персонажу.
      */
-    constructor(Socket, x, y, actionHandler){
+    constructor(Socket,x,y, actionHandler){
         this.id = Socket;
         this.actionHandler = actionHandler;
         this.x = x;
         this.y = y;
         this.squadKit = [];
         this.hp = 100;
-        this.stan = 0;
         this.score = 0;
         this.lastPlayerHit = null;
         this.attackRadius = 100;
-        this.vector = 'down';
-        this.ismove = false;
         this.sector_x = Math.floor((x) / 100);
         this.sector_y = Math.floor((y+30) / 60);
         this.speed = 1;
-        this.attack = false;
-        this.attack_stage = -1;
-        this.endOfAttack = 3;
     }
     init(tick){
         var actionData = (this.actionHandler.initDo(tick));
-        this.horizontal_move(actionData['horizontalMove']);
-        this.vertical_move(actionData['verticalMove']);
-        this.ismove = actionData['isMove'];
-        this.vector = actionData['vector'];
-        console.log(actionData);
+
+        if(actionData['action'] == 'move'){
+            this.horizontal_move(actionData['deltax']);
+            this.vertical_move(actionData['deltay']);
+        }
+        this.sector_x = Math.floor((this.x) / 100);
+        this.sector_y = Math.floor((this.y+30) / 60);
     }
     /** @description Движение по оси y.
      */
     vertical_move(y){
         this.y += y * this.speed;
-        console.log(typeof y);
-        console.log(typeof this.speed);
-        console.log(typeof this.y);
     }
     /** @description Движение по оси x.
      */

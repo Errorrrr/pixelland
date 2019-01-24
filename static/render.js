@@ -12,35 +12,35 @@ class AnimationPlayer{
         if(!this.player.ismove){
             this.slide = 0;
         }
-        if(this.player.vector == 'down'){
+        if(this.player.actionHandler.vector == 'down'){
             if(this.player.attack){
                 this.attackDown();
             }else{
                 this.moveDown();
             }
-        }else if(this.player.vector == 'up'){
+        }else if(this.player.actionHandler.vector == 'up'){
             this.moveUp();
-        }else if(this.player.vector == 'left'){
+        }else if(this.player.actionHandler.vector == 'left'){
             this.moveLeft();
-        }else if(this.player.vector == 'right'){
+        }else if(this.player.actionHandler.vector == 'right'){
             this.moveRight();
         }
     }
     moveUp(){
         var img = document.getElementById("run_up");
-        context.drawImage(img, 110*(this.slide % 6), 0, 110, 200, this.camera_x-50+18, this.camera_y-60+10, 70, 120);
+        context.drawImage(img, 110*(Math.ceil(this.player.actionHandler.actionStage/5) % 6), 0, 110, 200, this.camera_x-50+18, this.camera_y-60+10, 70, 120);
     }
     moveDown(){
         var img = document.getElementById("run_down");
-        context.drawImage(img, 200*(this.slide % 6), 0, 200, 240, this.camera_x-50, this.camera_y-60+7, 100, 120);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
+        context.drawImage(img, 200*(Math.ceil(this.player.actionHandler.actionStage/5) % 6), 0, 200, 240, this.camera_x-50, this.camera_y-60+7, 100, 120);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
     moveRight(){
         var img = document.getElementById("run_right");
-        context.drawImage(img, 203*(this.slide % 6), 0, 200, 240, this.camera_x-43, this.camera_y-50, 100, 120);
+        context.drawImage(img, 203*(Math.ceil(this.player.actionHandler.actionStage/5) % 6), 0, 200, 240, this.camera_x-43, this.camera_y-50, 100, 120);
     }
     moveLeft(){
         var img = document.getElementById("run_left");
-        context.drawImage(img, 203*(this.slide % 6), 0, 200, 240, this.camera_x-40, this.camera_y-49, 100, 120);
+        context.drawImage(img, 203*(Math.ceil(this.player.actionHandler.actionStage/5) % 6), 0, 200, 240, this.camera_x-40, this.camera_y-49, 100, 120);
     }
     attackDown(){
         var img = document.getElementById("attack_down");
