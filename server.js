@@ -28,13 +28,14 @@ const enums = require('./server/enums.js');
 var players = {};
 var tick = 0;
 io.on('connection', function(socket) {
+    var actionHandler = new ActoinHandler();
     socket.on('new player', function() {
-        var actionHandler = new ActoinHandler();
         players[socket.id] = new player(socket.id, 0, 0, actionHandler);
         io.sockets.emit('state', map);
         io.sockets.sockets[socket.id].emit('load_map', map);
     });
     socket.on('movement', function(data) {
+        actionHandler.setPressedCases(data);
         var player = players[socket.id] || {};
         player.init(data, tick);
     });

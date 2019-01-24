@@ -36,13 +36,14 @@ class Player{
     */
     vertical_move(y){
         this.y += y * this.speed;
-        console.log(this.y);
+        console.log(typeof y);
+        console.log(typeof this.speed);
+        console.log(typeof this.y);
     }
     /** @description Движение по оси x.
     */
     horizontal_move(x){
         this.x += x * this.speed;
-        console.log(this.x);
     }
     /** @description Метод атаки.
     */

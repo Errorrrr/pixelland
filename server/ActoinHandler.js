@@ -2,19 +2,13 @@ class ActionHandler{
     /** @description Передвижение.
     */
     constructor(){
-        this.data;
-        this.tick;
-        this.up = false;
-        this.down = false;
-        this.left = false;
-        this.right = false;
+        this.pressedCases;
         this.action;
         this.actionStage;
         this.isMove;
         this.horizontalMove;
         this.verticalMove;
         this.vector;
-        this.returnValue = [];
     }
     /** @description Задаем pressedCases.
     */
@@ -23,8 +17,7 @@ class ActionHandler{
         }
     /** @description Обрабатываем действия.
     */
-    initDo(data, tick){
-        this.setPressedCases(data);
+    initDo(tick){
         if(this.pressedCases.left){
             this.horizontalMove = -5;
             this.isMove = true;
@@ -44,11 +37,12 @@ class ActionHandler{
         }else if(!this.pressedCases.down &&  !this.pressedCases.right && !this.pressedCases.up && !this.pressedCases.left){
             this.isMove = false;
         }
-        this.returnValue['horizontalMove'] = this.horizontalMove;
-        this.returnValue['verticalMove'] = this.verticalMove;
-        this.returnValue['isMove'] = this.isMove;
-        this.returnValue['vector'] = this.vector;
-        return this.returnValue;
+        var returnValue = [];
+        returnValue['horizontalMove'] = this.horizontalMove;
+        returnValue['verticalMove'] = this.verticalMove;
+        returnValue['isMove'] = this.isMove;
+        returnValue['vector'] = this.vector;
+        return returnValue;
     }
 }
 
