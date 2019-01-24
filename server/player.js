@@ -4,8 +4,9 @@ class Player{
     * @param {int} stan указывает на время оглушения.
     * @param {string} lastPlayerHit указывает на последнего игрока, нанесшего урон персонажу.
     */
-    constructor(Socket, x, y){
+    constructor(Socket, x, y, actionHandler){
         this.id = Socket;
+        this.actionHandler = actionHandler;
         this.x = x;
         this.y = y;
         this.squadKit = [];
@@ -23,10 +24,21 @@ class Player{
         this.attack_stage = -1;
         this.endOfAttack = 12;
     }
+    init(tick){
+        var actionData = (this.actionHandler.initDo(tick));
+        this.horizontal_move(actionData['horizontalMove']);
+        this.vertical_move(actionData['verticalMove']);
+        this.ismove = actionData['isMove'];
+        this.vector = actionData['vector'];
+        console.log(actionData);
+    }
     /** @description Движение по оси y.
     */
     vertical_move(y){
         this.y += y * this.speed;
+        console.log(typeof y);
+        console.log(typeof this.speed);
+        console.log(typeof this.y);
     }
     /** @description Движение по оси x.
     */
