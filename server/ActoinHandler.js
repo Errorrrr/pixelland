@@ -14,53 +14,34 @@ class ActionHandler{
         this.horizontalMove;
         this.verticalMove;
         this.vector;
-        this.returnValue = [5,5,true,'down'];
+        this.returnValue = [];
     }
-    /** @description Обработка действий.
+    /** @description Задаем pressedCases.
     */
-    parsingCases(data, tick){
-            this.data = data;
-            this.tick = tick;
-            if (this.data.left) {
-                this.action = 'runLeft';
-                return this.initDo();
-            }
-            if (this.data.right) {
-                this.action = 'runRight';
-                return this.initDo();
-            }
-            if (this.data.up) {
-                this.action = 'runUp';
-                return this.initDo();
-            }
-            if (this.data.down) {
-                this.action = 'runDown';
-                return this.initDo();
-            }
-
-            if(!this.data.down &&  !this.data.right && !this.data.up && !this.data.left ){
-                this.action = 'iddle'
-                return this.initDo();
-            }
+    setPressedCases(data){
+        this.pressedCases = data;
         }
-    initDo(){
-        if(this.action == 'runLeft'){
+    /** @description Обрабатываем действия.
+    */
+    initDo(data, tick){
+        this.setPressedCases(data);
+        if(this.pressedCases.left){
             this.horizontalMove = -5;
             this.isMove = true;
             this.vector = 'left';
-        }else if(this.action == 'runRight'){
+        }else if(this.pressedCases.right){
             this.horizontalMove = 5;
             this.isMove = true;
             this.vector = 'right';
-        }else if(this.action == 'runUp'){
+        }else if(this.pressedCases.up){
             this.verticalMove = -5;
             this.isMove = true;
             this.vector = 'up';
-        }else if(this.action == 'runDown'){
+        }else if(this.pressedCases.down){
             this.verticalMove = 5;
             this.isMove = true;
             this.vector = 'down';
-        }else if(this.action == 'iddle'){
+        }else if(!this.pressedCases.down &&  !this.pressedCases.right && !this.pressedCases.up && !this.pressedCases.left){
             this.isMove = false;
         }
         this.returnValue['horizontalMove'] = this.horizontalMove;

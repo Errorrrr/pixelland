@@ -25,12 +25,12 @@ class Player{
         this.endOfAttack = 3;
     }
     init(data, tick){
-        var moveData = (this.actionHandler.parsingCases(data, tick));
-        this.horizontal_move(moveData['horizontalMove']);
-        this.vertical_move(moveData['verticalMove']);
-        this.ismove = moveData['isMove'];
-        this.vector = moveData['vector'];
-        console.log(moveData);
+        var actionData = (this.actionHandler.initDo(data, tick));
+        this.horizontal_move(actionData['horizontalMove']);
+        this.vertical_move(actionData['verticalMove']);
+        this.ismove = actionData['isMove'];
+        this.vector = actionData['vector'];
+        console.log(actionData);
     }
     /** @description Движение по оси y.
     */
