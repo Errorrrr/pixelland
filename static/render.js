@@ -28,7 +28,7 @@ class AnimationPlayer{
     }
     moveUp(){
         var img = document.getElementById("run_up");
-        context.drawImage(img, 200*(this.slide % 7), 0, 200, 240, this.camera_x-50, this.camera_y-60, 100, 120);
+        context.drawImage(img, 110*(this.slide % 6), 0, 110, 200, this.camera_x-50+18, this.camera_y-60+10, 70, 120);
     }
     moveDown(){
         var img = document.getElementById("run_down");
@@ -36,7 +36,7 @@ class AnimationPlayer{
     }
     moveRight(){
         var img = document.getElementById("run_right");
-        context.drawImage(img, 200*(this.slide % 7), 0, 200, 240, this.camera_x-41, this.camera_y-50, 83, 100);
+        context.drawImage(img, 203*(this.slide % 6), 0, 200, 240, this.camera_x-43, this.camera_y-50, 100, 120);
     }
     moveLeft(){
         var img = document.getElementById("run_left");
@@ -44,7 +44,7 @@ class AnimationPlayer{
     }
     attackDown(){
         var img = document.getElementById("attack_down");
-        context.drawImage(img, 100*(this.player.attack_stage+1), 0, 100, 101, this.camera_x-50+2, this.camera_y-60+19, 96, 98);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
+        context.drawImage(img, 228*(this.player.attack_stage+1), 0, 228, 280, this.camera_x-50+2, this.camera_y-60+19, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
 }
 class Renderer{
@@ -73,6 +73,9 @@ class Renderer{
             context.arc(player.SquadKit[0]-this.real_x+this.x, player.SquadKit[1]-this.real_y+this.y, 10, 0, 2 * Math.PI);
             context.fill();
         }
+        context.arc(this.x, this.y, 3, 0, 2 * Math.PI);
+        context.fill();
+
     }
 
     players(player){

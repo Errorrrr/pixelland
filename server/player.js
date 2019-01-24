@@ -21,7 +21,7 @@ class Player{
         this.speed = 1;
         this.attack = false;
         this.attack_stage = -1;
-        this.endOfAttack = 3;
+        this.endOfAttack = 12;
     }
     /** @description Движение по оси y.
     */
