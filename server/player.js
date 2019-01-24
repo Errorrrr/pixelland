@@ -4,8 +4,9 @@ class Player{
     * @param {int} stan указывает на время оглушения.
     * @param {string} lastPlayerHit указывает на последнего игрока, нанесшего урон персонажу.
     */
-    constructor(Socket, x, y){
+    constructor(Socket, x, y, ActionHandler){
         this.id = Socket;
+        this.ActionHandler = ActionHandler;
         this.x = x;
         this.y = y;
         this.squadKit = [];
