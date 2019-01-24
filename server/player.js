@@ -24,8 +24,8 @@ class Player{
         this.attack_stage = -1;
         this.endOfAttack = 3;
     }
-    init(data, tick){
-        var actionData = (this.actionHandler.initDo(data, tick));
+    init(tick){
+        var actionData = (this.actionHandler.initDo(tick));
         this.horizontal_move(actionData['horizontalMove']);
         this.vertical_move(actionData['verticalMove']);
         this.ismove = actionData['isMove'];
