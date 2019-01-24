@@ -22,21 +22,21 @@ server.listen(5000, function() {
 
 const map = require('./server/start_loc.js');
 const player = require('./server/player.js');
-const movement = require('./server/movement.js');
-var enums = require('./server/enums.js');
+const ActoinHandler = require('./server/ActoinHandler.js');
+const enums = require('./server/enums.js');
 
 var players = {};
 var tick = 0;
 io.on('connection', function(socket) {
     socket.on('new player', function() {
-        players[socket.id] = new player(socket.id, 0, 0);
+        var actionHandler = new ActoinHandler();
+        players[socket.id] = new player(socket.id, 0, 0, actionHandler);
         io.sockets.emit('state', map);
         io.sockets.sockets[socket.id].emit('load_map', map);
     });
     socket.on('movement', function(data) {
         var player = players[socket.id] || {};
-        move = new movement(player, data, tick);
-        move.parsingCases();
+        player.init(data, tick);
     });
 });
 
