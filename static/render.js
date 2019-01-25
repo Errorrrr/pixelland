@@ -110,15 +110,3 @@ class Renderer{
         }
     }
 }
-
-class hudRender{
-    constructor(){
-    }
-    renderHP(player){
-        context.beginPath();
-        context.font = "24px serif";
-        context.fillText("Health Point: " + player.hp, 25, 25);
-        context.fillText("Score: " + player.score, 25, 50);
-        context.fill();
-    }
-}
