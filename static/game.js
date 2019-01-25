@@ -37,10 +37,11 @@ socket.on('state', function(players, tick) {
     }
     for (var id in players) {
         var player = players[id];
+        console.log(id);
         if(id == socket.id){
-            render.player(player, tick);
-        }else{
-            render.players(player);
+            render.player(player);
+        }else if(id != 'location'){
+            render.players(players[id]);
         }
     }
     for (var id in players) {

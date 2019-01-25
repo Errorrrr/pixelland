@@ -2,11 +2,10 @@
  * Created by danil on 21.08.2018.
  */
 class AnimationPlayer{
-    constructor(player,x,y,slide){
+    constructor(player,x,y){
         this.player = player;
         this.camera_x = x;
         this.camera_y = y;
-        this.slide = slide;
     }
     handler(){
         if(!this.player.ismove){
@@ -43,7 +42,6 @@ class AnimationPlayer{
         context.drawImage(img, 203*(Math.ceil(this.player.actionHandler.actionStage/5) % 6), 0, 200, 240, this.camera_x-40, this.camera_y-49, 100, 120);
     }
     attackDown(){
-        console.log(3);
         var img = document.getElementById("attack_down");
         context.drawImage(img, 228*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 228, 280, this.camera_x-50+2-10, this.camera_y-60+19-20, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
@@ -59,16 +57,14 @@ class Renderer{
     }
 
 
-    player(player, game_tick){
+    player(player){
         this.real_x = player.x;
         this.real_y = player.y;
         context.msImageSmoothingEnabled = false;
         context.imageSmoothingEnabled = false;
 
-        this.checkSlide(game_tick);
-        var anim = new AnimationPlayer(player,this.x,this.y,this.slide);//Подумать над логикой слайдов
+        var anim = new AnimationPlayer(player,this.x,this.y);
         anim.handler();
-        console.log(player.squadKit);
         if(player.actionHandler.action == 'attack'){
             context.arc(player.squadKit['x']-this.real_x+this.x, player.squadKit['y']-this.real_y+this.y, 10, 0, 2 * Math.PI);
             context.fill();
@@ -84,8 +80,10 @@ class Renderer{
         if(player.hp < 1){
             plus = 100;
         }
-        context.arc(player.x-this.real_x+this.x, player.y-this.real_y+this.y, 50+plus, 0, 2 * Math.PI);
-        context.fill();
+        var anim = new AnimationPlayer(player,player.x-this.real_x+this.x,player.y-this.real_y+this.y);
+        anim.handler();
+        //context.arc(player.x-this.real_x+this.x, player.y-this.real_y+this.y, 50+plus, 0, 2 * Math.PI);
+        //context.fill();
     }
 
     background(player, map){
