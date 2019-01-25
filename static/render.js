@@ -45,7 +45,7 @@ class AnimationPlayer{
     attackDown(){
         console.log(3);
         var img = document.getElementById("attack_down");
-        context.drawImage(img, 228*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 228, 280, this.camera_x-50+2, this.camera_y-60+19, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
+        context.drawImage(img, 228*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 228, 280, this.camera_x-50+2-10, this.camera_y-60+19-20, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
 }
 class Renderer{

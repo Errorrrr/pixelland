@@ -54,9 +54,12 @@ class Player{
      */
     doAttack(players) {
         var squadKit = this.getAttackSquad();
+        console.log(players)
         for (var id in players) {
             var player = players[id];
+            console.log(id != this.id,player.isHeat(squadKit));
             if(id != this.id && player.isHeat(squadKit) == true){
+                console.log('havehit');
                 player.heat(this, this.damage);
             }
         }
