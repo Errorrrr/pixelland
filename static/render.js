@@ -13,7 +13,7 @@ class AnimationPlayer{
             this.slide = 0;
         }
         if(this.player.actionHandler.vector == 'down'){
-            if(this.player.attack){
+            if(this.player.actionHandler.action == 'attack'){
                 this.attackDown();
             }else{
                 this.moveDown();
@@ -43,8 +43,9 @@ class AnimationPlayer{
         context.drawImage(img, 203*(Math.ceil(this.player.actionHandler.actionStage/5) % 6), 0, 200, 240, this.camera_x-40, this.camera_y-49, 100, 120);
     }
     attackDown(){
+        console.log(3);
         var img = document.getElementById("attack_down");
-        context.drawImage(img, 228*(this.player.attack_stage+1), 0, 228, 280, this.camera_x-50+2, this.camera_y-60+19, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
+        context.drawImage(img, 228*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 228, 280, this.camera_x-50+2, this.camera_y-60+19, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
 }
 class Renderer{
@@ -67,10 +68,9 @@ class Renderer{
         this.checkSlide(game_tick);
         var anim = new AnimationPlayer(player,this.x,this.y,this.slide);//Подумать над логикой слайдов
         anim.handler();
-        
-        if(player.attack == true){
-            var SquadArr = player.SquadKit;
-            context.arc(player.SquadKit[0]-this.real_x+this.x, player.SquadKit[1]-this.real_y+this.y, 10, 0, 2 * Math.PI);
+        console.log(player.squadKit);
+        if(player.actionHandler.action == 'attack'){
+            context.arc(player.squadKit['x']-this.real_x+this.x, player.squadKit['y']-this.real_y+this.y, 10, 0, 2 * Math.PI);
             context.fill();
         }
         context.arc(this.x, this.y, 3, 0, 2 * Math.PI);

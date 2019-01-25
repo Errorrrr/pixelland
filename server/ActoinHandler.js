@@ -7,6 +7,8 @@ class ActionHandler{
         this.actionStage = 0;
         this.isMove = 'false';
         this.vector = 'up';
+        this.predAction = 'idle';
+        this.predVector = 'up';
     }
     /** @description Задаем pressedCases.
      */
@@ -17,10 +19,21 @@ class ActionHandler{
      */
     initDo(tick){
         var actionData = [];
-        var predAction = this.action;
-        var predVector = this.vector;
+        this.predAction = this.action;
+        this.predVector = this.vector;
 
+        if(!this.isActionEnd()){
+            actionData['action'] = this.action;
+            actionData['isDamageAttack'] = this.isDamageAttack();
+            return actionData;
+        }
 
+        if(this.pressedCases.attack){
+            actionData['action'] = 'attack';
+            this.action = 'attack';
+            this.isMove = false;
+            return actionData;
+        }
         actionData['deltax'] = 0;
         actionData['deltay'] = 0;
         if(this.pressedCases.left){
@@ -57,17 +70,39 @@ class ActionHandler{
             this.isMove = false;
         }
 
+        return actionData;
+    }
 
-        if(actionData['action'] == predAction && (predAction == 'move' ? predVector == this.vector : true) && this.actionStage < this.getEndOfAction(actionData['action'])){
+    updateActionStage(){
+        if(this.action == this.predAction && (this.predAction == 'move' ? this.predVector == this.vector : true) && this.actionStage < this.getEndOfAction(this.action)){
             this.actionStage += 1;
         }else{
             this.actionStage = 0;
         }
-        return actionData;
+    }
+
+    isActionEnd(){
+        if(this.action == 'move' || this.action == 'idle' ){
+            return true;
+        }
+        if(this.actionStage < this.getEndOfAction(this.action)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    isDamageAttack(){
+        if(this.actionStage == 30 || this.actionStage == 40){
+            return true;
+        }
+        return false;
     }
 
     getEndOfAction(action){
-
+        if(action == 'attack'){
+            return 60;
+        }
         if(action == 'move'){
             return 180;
         }

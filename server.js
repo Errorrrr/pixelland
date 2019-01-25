@@ -38,7 +38,7 @@ io.on('connection', function(socket) {
     socket.on('movement', function(data) {
         var player = players[socket.id] || {};
         player.actionHandler.setPressedCases(data);
-        player.init( tick);
+        player.init( tick, players);
     });
 });
 

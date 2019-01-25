@@ -17,27 +17,39 @@ class Player{
         this.sector_x = Math.floor((x) / 100);
         this.sector_y = Math.floor((y+30) / 60);
         this.speed = 1;
+        this.damage = 20;
     }
-    init(tick){
+
+    init(tick, players){
         var actionData = (this.actionHandler.initDo(tick));
 
         if(actionData['action'] == 'move'){
             this.horizontal_move(actionData['deltax']);
             this.vertical_move(actionData['deltay']);
         }
+
+        if(actionData['action'] == 'attack' && actionData['isDamageAttack'] == true){
+            this.doAttack(players);
+        }
+
+        this.actionHandler.updateActionStage();
+
         this.sector_x = Math.floor((this.x) / 100);
         this.sector_y = Math.floor((this.y+30) / 60);
     }
+
     /** @description Движение по оси y.
      */
     vertical_move(y){
         this.y += y * this.speed;
     }
+
     /** @description Движение по оси x.
      */
     horizontal_move(x){
         this.x += x * this.speed;
     }
+
     /** @description Метод атаки.
      */
     doAttack(players) {
@@ -45,24 +57,27 @@ class Player{
         for (var id in players) {
             var player = players[id];
             if(id != this.id && player.isHeat(squadKit) == true){
-                player.heat(this, 50);
-                if(player.hp < 1){
-                    player.death(players[this.id],1);
-                }
+                player.heat(this, this.damage);
             }
         }
     }
+
     /** @description Метод получения урона.
      * @param {number} player Сокет игрока, который нанес урон.
      */
     heat(player, pureDamage) {
         this.hp -= pureDamage;
-        player.stan = 2;
+        if(this.hp < 1){
+            this.death();
+        }
+     //   player.stan = 2;
         this.lastPlayerHit = player;
     }
+
     /** @description Попадает ли player?.
      */
     isHeat(squadKit){
+        console.log(squadKit, this.x, this.y);
         if(this.x >= squadKit['x']-(squadKit['sideX']/2) && this.x <= squadKit['x']+(squadKit['sideX']/2) && this.y >= squadKit['y']-(squadKit['sideY']/2) && this.y <= squadKit['y']+(squadKit['sideY']/2)){
             return true;
         }
@@ -70,38 +85,38 @@ class Player{
     }
     /** @description Cмерть персонажа.
      */
-    death(playerKiller,countScore){
-        playerKiller.addScore(countScore);
+    death(){
+        this.lastPlayerHit.addScore(1);
         //io.sockets.connected[player.id].disconnect(true);
     }
     /** @description Добавление очков.
      */
-    addScore(countScore,playerKiller){
+    addScore(countScore){
         this.score += countScore;
     }
     /** @description Просчет координат и стороны прямоугольника атаки.
      */
     getAttackSquad(){
         var x,y,sideX,sideY;
-        if(this.vector == 'up'){
+        if(this.actionHandler.vector == 'up'){
             x = this.x;
             y = this.y - this.attackRadius;
             sideX = 100;
             sideY = 60;
         }
-        else if(this.vector == 'down'){
+        else if(this.actionHandler.vector == 'down'){
             x = this.x;
             y = this.y + this.attackRadius;
             sideX = 100;
             sideY = 60;
         }
-        else if(this.vector == 'left'){
+        else if(this.actionHandler.vector == 'left'){
             x = this.x - this.attackRadius;
             y = this.y;
             sideX = 60;
             sideY = 100;
         }
-        else if(this.vector == 'right'){
+        else if(this.actionHandler.vector == 'right'){
             x = this.x + this.attackRadius;
             y = this.y;
             sideX = 60;
