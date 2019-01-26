@@ -1,27 +1,29 @@
 class hudRender{
     /** @description Отрисовка интерфейса.
     */
-    constructor(player){
-        this.player = player;
-    }
-    renderAll(){
+    constructor(){}
+    renderAll(player){
         context.beginPath();
         context.font = "30px Arial";
         context.fillStyle = '#274fc6';
-        this.renderHP();
-        this.renderScore();
+        this.renderHP(player);
+        this.renderScore(player);
         context.fill();
     }
-    renderHP(){
-        context.fillText("HP: " + this.player.hp, 25, 25);
+    renderHP(player){
+        context.fillText("HP: " + player.hp, 25, 25);
     }
-    renderScore(){
-        context.fillText("Score: " + this.player.score, 25, 50);
+    renderScore(player){
+        context.fillText("Score: " + player.score, 25, 50);
     }
-    renderWinthParam(playerNumber, x, y){
+    renderWinthParam(playerNumber, x, y, player){
+        var playerID = 1;
+        var y = 25;
         context.beginPath();
         context.fillStyle = '3884ff';
-        context.fillText("HP №" + playerNumber + " = " + this.player.hp, x, y);
+        context.fillText("HP №" + playerNumber + " = " + player.hp, x, y);
         context.fill();
+        playerID++;
+        y = y + 25;
     }
 }

@@ -14,6 +14,7 @@ client_w=document.body.clientWidth;
 client_h=document.body.clientHeight;
 
 let render = new Renderer(client_w/2, client_h/2);
+let UI = new hudRender();
 
 socket.emit('new player');
 setInterval(function() {
@@ -46,18 +47,12 @@ socket.on('state', function(players, tick) {
     }
     for (var id in players) {
         var player = players[id];
-        let UI = new hudRender(player);
         if(id == socket.id){
             UI.renderAll();
         }
     }
-    var playerID = 1;
-    var y = 25;
     for (var id in players) {
         var player = players[id];
-        let UI = new hudRender(player);
-        UI.renderWinthParam(playerID, 200, y);
-        playerID++;
-        y = y + 25;
+        UI.renderWinthParam(playerID, 200, y, player);
     }
 });
