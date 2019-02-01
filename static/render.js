@@ -20,7 +20,11 @@ class AnimationPlayer{
         }else if(this.player.actionHandler.vector == 'up'){
             this.moveUp();
         }else if(this.player.actionHandler.vector == 'left'){
-            this.moveLeft();
+            if(this.player.actionHandler.action == 'attack'){
+                this.attackLeft();
+            }else{
+                this.moveLeft();
+            }
         }else if(this.player.actionHandler.vector == 'right'){
             this.moveRight();
         }
@@ -44,6 +48,10 @@ class AnimationPlayer{
     attackDown(){
         var img = document.getElementById("attack_down");
         context.drawImage(img, 228*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 228, 280, this.camera_x-50+2-10, this.camera_y-60+19-20, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
+    }
+    attackLeft(){
+        var img = document.getElementById("attack_left");
+        context.drawImage(img, 342*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 342, 200, this.camera_x-50+2-120, this.camera_y-60+19-40, 211, 140);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
 }
 class Renderer{

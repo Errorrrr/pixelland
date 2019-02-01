@@ -45,14 +45,5 @@ socket.on('state', function(players, tick) {
             render.players(players[id]);
         }
     }
-    for (var id in players) {
-        var player = players[id];
-        if(id == socket.id){
-            UI.renderAll();
-        }
-    }
-    for (var id in players) {
-        var player = players[id];
-        UI.renderWinthParam(playerID, 200, y, player);
-    }
+
 });
