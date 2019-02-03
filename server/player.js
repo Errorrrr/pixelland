@@ -13,6 +13,8 @@ class Player{
         this.hp = 100;
         this.score = 0;
         this.lastPlayerHit = null;
+        this.widthAttack = 200;
+        this.heightAttack = 200;
         this.attackRadius = 100;
         this.sector_x = Math.floor((x) / 100);
         this.sector_y = Math.floor((y+30) / 60);
@@ -103,27 +105,27 @@ class Player{
         var x,y,sideX,sideY;
         if(this.actionHandler.vector == 'up'){
             x = this.x;
-            y = this.y - this.attackRadius;
-            sideX = 100;
-            sideY = 60;
+            y = this.y - this.attackRadius - this.heightAttack;
+            sideX = this.widthAttack;
+            sideY = this.heightAttack;
         }
         else if(this.actionHandler.vector == 'down'){
             x = this.x;
             y = this.y + this.attackRadius;
-            sideX = 100;
-            sideY = 60;
+            sideX = this.widthAttack;
+            sideY = this.heightAttack;
         }
         else if(this.actionHandler.vector == 'left'){
-            x = this.x - this.attackRadius;
+            x = this.x - this.attackRadius - this.heightAttack;
             y = this.y;
-            sideX = 60;
-            sideY = 100;
+            sideX = this.heightAttack;
+            sideY = this.widthAttack;
         }
         else if(this.actionHandler.vector == 'right'){
             x = this.x + this.attackRadius;
             y = this.y;
-            sideX = 60;
-            sideY = 100;
+            sideX = this.heightAttack;
+            sideY = this.widthAttack;
         }
         this.squadKit['x'] = x;
         this.squadKit['y'] = y;

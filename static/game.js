@@ -48,11 +48,16 @@ socket.on('state', function(players, tick) {
     for (var id in players) {
         var player = players[id];
         if(id == socket.id){
-            UI.renderAll();
+            UI.renderAll(player);
+            UI.renderAtackSquad(client_w/2, client_h/2, player);
         }
     }
+    var playerID = 1;
+    var y = 25;
     for (var id in players) {
         var player = players[id];
         UI.renderWinthParam(playerID, 200, y, player);
+        playerID++;
+        y = y + 25;
     }
 });

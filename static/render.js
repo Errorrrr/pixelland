@@ -66,8 +66,6 @@ class Renderer{
         var anim = new AnimationPlayer(player,this.x,this.y);
         anim.handler();
         if(player.actionHandler.action == 'attack'){
-            context.arc(player.squadKit['x']-this.real_x+this.x, player.squadKit['y']-this.real_y+this.y, 10, 0, 2 * Math.PI);
-            context.fill();
         }
         context.arc(this.x, this.y, 3, 0, 2 * Math.PI);
         context.fill();

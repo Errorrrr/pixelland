@@ -17,13 +17,17 @@ class hudRender{
         context.fillText("Score: " + player.score, 25, 50);
     }
     renderWinthParam(playerNumber, x, y, player){
-        var playerID = 1;
-        var y = 25;
         context.beginPath();
         context.fillStyle = '3884ff';
         context.fillText("HP №" + playerNumber + " = " + player.hp, x, y);
         context.fill();
-        playerID++;
-        y = y + 25;
+    }
+    //Дикие костыли, которые пофиксятся потом или выпилятся сто процентов при релизе из-за ненадобности.
+    renderAtackSquad(x, y, player){
+        context.strokeRect(x+player.attackRadius, y-player.widthAttack/2, player.heightAttack, player.widthAttack);
+        context.strokeRect(x-player.attackRadius-player.heightAttack, y-player.widthAttack/2, player.heightAttack, player.widthAttack);
+        context.strokeRect(x-player.widthAttack/2, y+player.attackRadius, player.widthAttack, player.heightAttack);
+        context.strokeRect(x-player.widthAttack/2, y-player.attackRadius-player.heightAttack, player.widthAttack, player.heightAttack);
+        context.fill();
     }
 }
