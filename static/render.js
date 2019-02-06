@@ -18,7 +18,11 @@ class AnimationPlayer{
                 this.moveDown();
             }
         }else if(this.player.actionHandler.vector == 'up'){
-            this.moveUp();
+            if(this.player.actionHandler.action == 'attack'){
+                this.attackUp();
+            }else{
+                this.moveUp();
+            }
         }else if(this.player.actionHandler.vector == 'left'){
             if(this.player.actionHandler.action == 'attack'){
                 this.attackLeft();
@@ -26,7 +30,11 @@ class AnimationPlayer{
                 this.moveLeft();
             }
         }else if(this.player.actionHandler.vector == 'right'){
-            this.moveRight();
+            if(this.player.actionHandler.action == 'attack'){
+                this.attackRight();
+            }else{
+                this.moveRight();
+            }
         }
     }
     moveUp(){
@@ -49,9 +57,17 @@ class AnimationPlayer{
         var img = document.getElementById("attack_down");
         context.drawImage(img, 228*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 228, 280, this.camera_x-50+2-10, this.camera_y-60+19-20, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
+    attackUp(){
+        var img = document.getElementById("attack_up");
+        context.drawImage(img, 166*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 166, 200, this.camera_x-50+2-10, this.camera_y-60+19-20, 140, 160);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
+    }
     attackLeft(){
         var img = document.getElementById("attack_left");
         context.drawImage(img, 342*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 342, 200, this.camera_x-50+2-120, this.camera_y-60+19-40, 211, 140);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
+    }
+    attackRight(){
+        var img = document.getElementById("attack_right");
+        context.drawImage(img, 398*(Math.ceil(this.player.actionHandler.actionStage/4) % 15), 0, 398, 200, this.camera_x-50+2-120, this.camera_y-60+19-40, 211, 140);// ПЛЮСЫ ДЛЯ ОТЦЕНТРИРОВАНИЯ СПРАЙТА
     }
 }
 class Renderer{
